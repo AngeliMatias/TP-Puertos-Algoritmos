@@ -44,13 +44,13 @@ public class Heap {
         return items[direccionPadre(direccion)];
     }
 
-    private void intercambiar(int dir1,int dir2){
+    private void intercambiar(int dir1,int dir2) {
         NodoGrafo temporal = items[dir1];
         items[dir1]= items[dir2];
         items[dir2]= temporal;
     }
 
-    private int funcioncmp(NodoGrafo vertice1, NodoGrafo vertice2){
+    private int compare(NodoGrafo vertice1, NodoGrafo vertice2) {
         int valor1 = vertice1.getDistancia();
         int valor2 = vertice2.getDistancia();
         if (valor1 > valor2) return -1;
@@ -58,10 +58,10 @@ public class Heap {
         return 1;
     }
 
-    private int busquedaPos(NodoGrafo dato){
+    private int busquedaPos(NodoGrafo dato) {
         int pos=0;
-        while (pos< tamanio){
-            if (funcioncmp(items[pos], dato) == 0){
+        while (pos< tamanio) {
+            if (compare(items[pos], dato) == 0){
                 break;
             }
             pos++;
@@ -100,10 +100,10 @@ public class Heap {
         int direccion = posicionIni;
         while (tieneHijoIz(direccion)){
             int direccionHijoMenor = direccionHijoIz(direccion);
-            if (tieneHijoDe(direccion) && funcioncmp(hijoDe(direccion),hijoIz(direccion))==1){
+            if (tieneHijoDe(direccion) && compare(hijoDe(direccion),hijoIz(direccion))==1){
                 direccionHijoMenor = direccionHijoDe(direccion);
             }
-            if (funcioncmp(items[direccion],items[direccionHijoMenor])==1){
+            if (compare(items[direccion],items[direccionHijoMenor])==1){
                 break;
             } else {
                 intercambiar(direccion,direccionHijoMenor);
@@ -114,7 +114,7 @@ public class Heap {
 
     public void heapifyup(int posicionIni){
         int direccion = posicionIni;
-        while (tienePadre(direccion) && (funcioncmp(padre(direccion),items[direccion])==-1)){
+        while (tienePadre(direccion) && (compare(padre(direccion),items[direccion])==-1)){
             intercambiar(direccionPadre(direccion),direccion);
             direccion = direccionPadre(direccion);
         }
