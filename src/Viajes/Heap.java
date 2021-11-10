@@ -50,7 +50,6 @@ public class Heap {
         items[dir2]= temporal;
     }
 
-    //compara un vertice con otro y devuelve un numero que representa el tamanio de uno respecto al otro
     private int funcioncmp(NodoGrafo vertice1, NodoGrafo vertice2){
         int valor1 = vertice1.getDistancia();
         int valor2 = vertice2.getDistancia();
@@ -73,14 +72,12 @@ public class Heap {
         return pos;
     }
 
-    //post: inicializa las variables del heap
     public Heap(int capacidadInicial){
         tamanio=0;
         capacidad =capacidadInicial;
         items = new NodoGrafo[capacidad];
     }
-    /*pre: el heap no esta vacio
-     *post: se retira el menor elemento, se reduce el tamanio y luego se reacomodan los elementos */
+
     public NodoGrafo extraer() {
         NodoGrafo item = items[0];
         tamanio--;
@@ -88,19 +85,17 @@ public class Heap {
         heapifydown(0);
         return item;
     }
-    //post: devuelve un bool afirmando si el heap se encuentra vacio o no
     public boolean estaVacio(){
         return (tamanio == 0);
     }
-    //post: agrega un nuevo elemento en el heap y lo acomoda respecto a los demas
+
     public void agregar(NodoGrafo item) {
         items[tamanio] = item;
         heapifyup(tamanio);
         tamanio++;
 
     }
-    /*post: reacomoda los elementos a partir de una posicion dada
-     * comparandolo con los valores de sus hijos */
+
     public void heapifydown(int posicionIni){
         int direccion = posicionIni;
         while (tieneHijoIz(direccion)){
@@ -116,7 +111,7 @@ public class Heap {
             direccion = direccionHijoMenor;
         }
     }
-    //post: similar a heapifydown pero lo hace comparandolo con los valores de su padre
+
     public void heapifyup(int posicionIni){
         int direccion = posicionIni;
         while (tienePadre(direccion) && (funcioncmp(padre(direccion),items[direccion])==-1)){
